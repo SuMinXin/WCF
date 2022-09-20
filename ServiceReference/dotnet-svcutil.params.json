@@ -1,0 +1,12 @@
+{
+  "providerId": "Microsoft.Tools.ServiceModel.Svcutil",
+  "version": "2.0.3",
+  "options": {
+    "inputs": [
+      "http://localhost:60366/Service.svc"
+    ],
+    "outputFile": "Reference.cs",
+    "targetFramework": "net6.0",
+    "typeReuseMode": "All"
+  }
+}
