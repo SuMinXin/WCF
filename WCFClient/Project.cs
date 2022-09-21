@@ -8,14 +8,19 @@ namespace WCFClient
         static void Main()
         {
             ServiceClient client = new ServiceClient();
+
+            // Configure client with valid computer or domain account (username,password).
+            client.ClientCredentials.UserName.UserName = "WCF-DEMO";
+            client.ClientCredentials.UserName.Password = "WCF-DEMO".ToString();
+            
+            Console.WriteLine(client.GetCallerIdentity());
+
             Console.WriteLine("Enter any number you want...");
-            // Always close the client.
             int data = ReadKey();
-            // Use the 'client' variable to call operations on the service.
             string response = client.GetData(data);
             Console.WriteLine(response);
             Console.Write("Press any key to stop...");
-            // Always close the client.
+            // close the client.
             Console.ReadKey();
             client.Close();
         }
