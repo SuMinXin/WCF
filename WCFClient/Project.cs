@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.ServiceModel;
 using WCFClient.ServiceReference;
 
@@ -11,8 +12,7 @@ namespace WCFClient
             // Create the binding.
             WSHttpBinding myBinding = new WSHttpBinding();
             myBinding.Security.Mode = SecurityMode.Message;
-            myBinding.Security.Message.ClientCredentialType =
-                MessageCredentialType.UserName;
+            myBinding.Security.Message.ClientCredentialType = MessageCredentialType.UserName;
 
             // Create the client.
             ServiceClient client = new ServiceClient();
@@ -23,16 +23,24 @@ namespace WCFClient
             client.ClientCredentials.UserName.UserName = ReadData("account");
             client.ClientCredentials.UserName.Password = ReadData("password");
 
+            client.ClientCredentials.ServiceCertificate.Authentication.CertificateValidationMode
+               = System.ServiceModel.Security.X509CertificateValidationMode.PeerOrChainTrust;
+
             Console.WriteLine("Enter any number you want...");
             int data = ReadKey();
-            string response = client.GetData(data);
-            Console.WriteLine(response);
+            try {
+                string response = client.GetData(data);
+                Console.WriteLine(response);
+            } catch (Exception ex) {
+                Console.WriteLine($"Exception:{ex.ToString()}");
+            }
             Console.Write("Press any key to stop...");
             // close the client.
             Console.ReadKey();
             client.Close();
             
         }
+
         static int ReadKey()
         {
             string data = Console.ReadLine();

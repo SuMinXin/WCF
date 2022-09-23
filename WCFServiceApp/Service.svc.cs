@@ -2,6 +2,7 @@
 using System.Security.Cryptography.X509Certificates;
 using System.ServiceModel;
 using System.ServiceModel.Description;
+using System.ServiceModel.Security;
 
 namespace WCFServiceApp
 {
@@ -46,7 +47,10 @@ namespace WCFServiceApp
             // Create the service host.
             ServiceHost myServiceHost =
                 new ServiceHost(typeof(Service), httpUri);
-            myServiceHost.AddServiceEndpoint(typeof(IService), binding, "Service");
+            myServiceHost.AddServiceEndpoint(typeof(IService), binding, "");
+
+            myServiceHost.Credentials.UserNameAuthentication.UserNamePasswordValidationMode = UserNamePasswordValidationMode.Custom;
+            myServiceHost.Credentials.UserNameAuthentication.CustomUserNamePasswordValidator = new CustomValidator();
 
             ServiceMetadataBehavior sm = new ServiceMetadataBehavior();
             sm.HttpGetEnabled = true;

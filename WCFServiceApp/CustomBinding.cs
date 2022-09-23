@@ -11,7 +11,6 @@ namespace WCFServiceApp
     // https://learn.microsoft.com/en-us/dotnet/api/system.servicemodel.wshttpbinding?view=netframework-4.8
     public sealed class CustomBindingCreator
     {
-
         public static void snippetSecurity()
         {
             WSHttpBinding wsHttpBinding = new WSHttpBinding();
