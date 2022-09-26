@@ -10,6 +10,8 @@ namespace WCFServiceApp
 
         [OperationContract]
         string GetData(int value);
+        [OperationContract]
+        string Login();
 
         [OperationContract]
         CompositeType GetDataUsingDataContract(CompositeType composite);

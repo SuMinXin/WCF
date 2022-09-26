@@ -84,6 +84,12 @@ namespace WCFClient.ServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetData", ReplyAction="http://tempuri.org/IService/GetDataResponse")]
         System.Threading.Tasks.Task<string> GetDataAsync(int value);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/Login", ReplyAction="http://tempuri.org/IService/LoginResponse")]
+        string Login();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/Login", ReplyAction="http://tempuri.org/IService/LoginResponse")]
+        System.Threading.Tasks.Task<string> LoginAsync();
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetDataUsingDataContract", ReplyAction="http://tempuri.org/IService/GetDataUsingDataContractResponse")]
         WCFClient.ServiceReference.CompositeType GetDataUsingDataContract(WCFClient.ServiceReference.CompositeType composite);
         
@@ -124,6 +130,14 @@ namespace WCFClient.ServiceReference {
         
         public System.Threading.Tasks.Task<string> GetDataAsync(int value) {
             return base.Channel.GetDataAsync(value);
+        }
+        
+        public string Login() {
+            return base.Channel.Login();
+        }
+        
+        public System.Threading.Tasks.Task<string> LoginAsync() {
+            return base.Channel.LoginAsync();
         }
         
         public WCFClient.ServiceReference.CompositeType GetDataUsingDataContract(WCFClient.ServiceReference.CompositeType composite) {

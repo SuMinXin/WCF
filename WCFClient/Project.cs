@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.ServiceModel;
 using WCFClient.ServiceReference;
 
@@ -23,9 +22,18 @@ namespace WCFClient
             client.ClientCredentials.UserName.UserName = ReadData("account");
             client.ClientCredentials.UserName.Password = ReadData("password");
 
-            client.ClientCredentials.ServiceCertificate.Authentication.CertificateValidationMode
-               = System.ServiceModel.Security.X509CertificateValidationMode.PeerOrChainTrust;
+            // client.ClientCredentials.ServiceCertificate.Authentication.CertificateValidationMode = System.ServiceModel.Security.X509CertificateValidationMode.PeerOrChainTrust;
+            client.ClientCredentials.ServiceCertificate.Authentication.CertificateValidationMode = System.ServiceModel.Security.X509CertificateValidationMode.None;
 
+            try
+            {
+                string response = client.Login();
+                Console.WriteLine("Login " + response);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Exception:{ex.ToString()}");
+            }
             Console.WriteLine("Enter any number you want...");
             int data = ReadKey();
             try {
